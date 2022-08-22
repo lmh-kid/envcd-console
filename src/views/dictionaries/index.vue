@@ -1,15 +1,29 @@
 <template>
   <global-page>
     <a-typography-title :heading="5" style="margin-top: 0">
-      {{ t('scopespaces.list') }}
+      {{ t('dictionaries.list') }}
     </a-typography-title>
-    <div style="display: flex; justify-content: end">
+    <div style="display: flex; justify-content: space-between">
+      <a-space align="end" direction="horizontal" wrap>
+        <a-input-group>
+          <a-select
+            :options="['Option1', 'Option2', 'Option3']"
+            :style="{ width: '160px' }"
+            placeholder="first"
+          />
+          <a-input-search
+            :style="{ width: '300px' }"
+            placeholder="second"
+            search-button
+          />
+        </a-input-group>
+      </a-space>
       <a-space align="end" direction="horizontal" wrap>
         <a-button type="primary" @click="openModal('create')">
-          {{ t('scopespaces.create') }}
+          {{ t('dictionaries.create') }}
         </a-button>
         <a-button type="primary" @click="openModal('deleteAll')">
-          {{ t('scopespaces.deleteAll') }}
+          {{ t('dictionaries.deleteAll') }}
         </a-button>
       </a-space>
     </div>
@@ -23,11 +37,14 @@
       :data="userList"
       :pagination="pagination"
     >
-      <template #identity="{ record }">
-        {{ t(`scopespaces.identity.${['admin'][record.identity] || 'empty'}`) }}
-      </template>
       <template #state="{ record }">
-        {{ t(`scopespaces.state.${record.state}`) }}
+        <icon-stop v-if="record.state === 'deleted'" class="color-e" />
+        <icon-check-circle v-if="record.state === 'enabled'" class="color-s" />
+        <icon-exclamation-circle
+          v-if="record.state === 'disabled'"
+          class="color-w"
+        />
+        {{ t(`dictionaries.state.${record.state}`) }}
       </template>
       <template #operation="{ record }">
         <a-space align="end" direction="horizontal">
@@ -54,8 +71,8 @@
   import { User } from '@/types/user';
   import { getUserList } from '@/api/user';
   import getTableColumn from './config';
-  import CreateUser from './components/create-user.vue';
-  import DeleteUser from './components/delete-user.vue';
+  import CreateUser from './components/create-dictionaries.vue';
+  import DeleteUser from './components/delete-dictionaries.vue';
 
   const { currentLocale } = useLocale();
   const { t } = useI18n();
@@ -78,20 +95,20 @@
   });
 
   // get user list
-  const getscopespaces = () => {
+  const getDictionaries = () => {
     userList.value = [
       {
         id: 2,
         name: 'string',
         identity: 0,
-        state: true,
+        state: 'enabled',
         createAt: '2022-08-15',
       },
       {
         id: 3,
         name: 'string',
         identity: 5,
-        state: false,
+        state: 'disabled',
         createAt: '2022-08-15',
       },
     ];
@@ -100,7 +117,7 @@
       userList.value = res;
     });
   };
-  getscopespaces();
+  getDictionaries();
 
   const openModal = (type: string, user?: User) => {
     if (type === 'create') createModal.value.openModal();

@@ -34,7 +34,7 @@
           <a-button type="primary" @click="openModal('edit', record)">
             {{ t('global.edit') }}
           </a-button>
-          <a-button type="primary" @click="openModal('edit', record)">
+          <a-button type="primary" @click="openModal('delete', record)">
             {{ t('global.delete') }}
           </a-button>
         </a-space>
@@ -52,6 +52,8 @@
   import { useI18n } from 'vue-i18n';
   import useLocale from '@/hooks/locale';
   import { User } from '@/types/user';
+  import { getUserList } from '@/api/user';
+  import getTableColumn from './config';
   import CreateUser from './components/create-user.vue';
   import DeleteUser from './components/delete-user.vue';
 
@@ -69,56 +71,36 @@
     showCheckedAll: true,
     onlyCurrent: false,
   });
-  const getTableColumn = () => {
-    userColumns.value = [
-      {
-        title: t('users.name'),
-        dataIndex: 'name',
-      },
-      {
-        title: t('users.identity'),
-        dataIndex: 'identity',
-        slotName: 'identity',
-      },
-      {
-        title: t('users.state'),
-        dataIndex: 'state',
-        slotName: 'state',
-      },
-      {
-        title: t('users.createAt'),
-        dataIndex: 'createAt',
-      },
-      {
-        title: t('users.operation'),
-        dataIndex: 'operation',
-        slotName: 'operation',
-      },
-    ];
-  };
-  watch(currentLocale, getTableColumn);
+
+  watch(currentLocale, (userColumns.value = getTableColumn(t)));
   nextTick(() => {
-    getTableColumn();
+    userColumns.value = getTableColumn(t);
   });
 
   // get user list
-  const getUserList = () => {
+  const getUsers = () => {
     userList.value = [
       {
         id: 2,
         name: 'string',
         identity: 0,
         state: true,
+        createAt: '2022-08-15',
       },
       {
         id: 3,
         name: 'string',
         identity: 5,
         state: false,
+        createAt: '2022-08-15',
       },
     ];
+    // if api is ok
+    getUserList().then((res: User[]) => {
+      userList.value = res;
+    });
   };
-  getUserList();
+  getUsers();
 
   const openModal = (type: string, user?: User) => {
     if (type === 'create') createModal.value.openModal();

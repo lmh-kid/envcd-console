@@ -6,7 +6,7 @@ const DASHBOARD: AppRouteRecordRaw = {
   name: 'config',
   component: DEFAULT_LAYOUT,
   meta: {
-    locale: 'menu.config',
+    locale: 'menu.dictionaries',
     requiresAuth: true,
     icon: 'icon-dashboard',
     order: 0,
@@ -15,9 +15,9 @@ const DASHBOARD: AppRouteRecordRaw = {
     {
       path: 'index',
       name: 'configIndex',
-      component: () => import('@/views/config/index.vue'),
+      component: () => import('@/views/dictionaries/index.vue'),
       meta: {
-        locale: 'menu.config',
+        locale: 'menu.dictionariesList',
         requiresAuth: true,
         roles: ['*'],
       },

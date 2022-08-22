@@ -1,6 +1,8 @@
 import localeMessageBox from '@/components/message-box/locale/en-US';
 import localeLogin from '@/views/login/locale/en-US';
 import localeUsers from '@/views/users/locale/en-US';
+import localeScopespaces from '@/views/application/locale/en-US';
+import localeDictionaries from '@/views/dictionaries/locale/en-US';
 
 import localeWorkplace from '@/views/dashboard/workplace/locale/en-US';
 
@@ -21,8 +23,9 @@ export default {
   'navbar.docs': 'Docs',
   'navbar.action.locale': 'Switch to English',
   // menu
-  'menu.config': 'Envcd Config',
-  'menu.application': 'Envcd Application',
+  'menu.dictionaries': 'Dictionaries',
+  'menu.dictionariesList': 'Dictionaries List',
+  'menu.scopespaces': 'Scope Spaces',
   'menu.users': 'User Management',
   'menu.userList': 'User List',
   'global.edit': 'Edit',
@@ -33,4 +36,6 @@ export default {
   ...localeLogin,
   ...localeWorkplace,
   ...localeUsers,
+  ...localeScopespaces,
+  ...localeDictionaries,
 };

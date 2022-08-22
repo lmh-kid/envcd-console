@@ -1,0 +1,17 @@
+export default {
+  'dictionaries.list': 'Dictionaries',
+  'dictionaries.dictKey': 'Dictionary Key',
+  'dictionaries.dictValue': 'Dictionary Value',
+  'dictionaries.version': 'Version',
+  'dictionaries.state.enabled': 'Enabled',
+  'dictionaries.state.disabled': 'Disabled',
+  'dictionaries.state.deleted': 'Deleted',
+  'dictionaries.state': 'State',
+  'dictionaries.createAt': 'Create Time',
+  'dictionaries.operation': 'Operation',
+  'dictionaries.create': 'Create Dictionary',
+  'dictionaries.deleteAll': 'Batch Delete',
+  'dictionaries.delete': 'Delete Dictionary',
+  'dictionaries.createDictionaries': 'Create Dictionary',
+  'dictionaries.editDictionaries': 'Edit Dictionary',
+};

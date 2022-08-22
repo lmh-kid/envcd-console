@@ -6,7 +6,7 @@ const DASHBOARD: AppRouteRecordRaw = {
   name: 'application',
   component: DEFAULT_LAYOUT,
   meta: {
-    locale: 'menu.application',
+    locale: 'menu.scopespaces',
     requiresAuth: true,
     icon: 'icon-dashboard',
     order: 0,
@@ -17,7 +17,7 @@ const DASHBOARD: AppRouteRecordRaw = {
       name: 'applicationIndex',
       component: () => import('@/views/application/index.vue'),
       meta: {
-        locale: 'menu.application',
+        locale: 'menu.scopespaces',
         requiresAuth: true,
         roles: ['*'],
       },

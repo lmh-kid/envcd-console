@@ -1,0 +1,17 @@
+export default {
+  'dictionaries.list': '字典列表',
+  'dictionaries.dictKey': '字典Key值',
+  'dictionaries.dictValue': '字典Value值',
+  'dictionaries.version': '字典版本',
+  'dictionaries.state.enabled': '已启用',
+  'dictionaries.state.disabled': '已禁用',
+  'dictionaries.state.deleted': '已删除',
+  'dictionaries.state': '字典状态',
+  'dictionaries.createAt': '创建时间',
+  'dictionaries.operation': '操作',
+  'dictionaries.create': '创建字典',
+  'dictionaries.deleteAll': '批量删除',
+  'dictionaries.delete': '删除字典',
+  'dictionaries.createDictionaries': '创建字典',
+  'dictionaries.editDictionaries': '编辑字典',
+};
