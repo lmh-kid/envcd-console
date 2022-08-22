@@ -1,5 +1,6 @@
 import localeMessageBox from '@/components/message-box/locale/zh-CN';
 import localeLogin from '@/views/login/locale/zh-CN';
+import localeUsers from '@/views/users/locale/zh-CN';
 
 import localeWorkplace from '@/views/dashboard/workplace/locale/zh-CN';
 
@@ -19,8 +20,17 @@ export default {
   'menu.user': '个人中心',
   'navbar.docs': '文档中心',
   'navbar.action.locale': '切换为中文',
+  // menu
+  'menu.config': '全局配置',
+  'menu.application': '应用列表',
+  'menu.users': '用户管理',
+  'menu.userList': '用户列表',
+  'global.edit': '编辑',
+  'global.delete': '删除',
+
   ...localeSettings,
   ...localeMessageBox,
   ...localeLogin,
   ...localeWorkplace,
+  ...localeUsers,
 };

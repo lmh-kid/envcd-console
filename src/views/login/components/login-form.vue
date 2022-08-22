@@ -55,9 +55,6 @@
         <a-button type="primary" html-type="submit" long :loading="loading">
           {{ $t('login.form.login') }}
         </a-button>
-        <a-button type="text" long class="login-form-register-btn">
-          {{ $t('login.form.register') }}
-        </a-button>
       </a-space>
     </a-form>
   </div>
@@ -82,8 +79,8 @@
 
   const loginConfig = useStorage('login-config', {
     rememberPassword: true,
-    username: 'admin', // 演示默认值
-    password: 'admin', // demo default value
+    username: '',
+    password: '',
   });
   const userInfo = reactive({
     username: loginConfig.value.username,
@@ -103,7 +100,7 @@
         await userStore.login(values as LoginData);
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
         router.push({
-          name: (redirect as string) || 'Workplace',
+          name: (redirect as string) || 'dashboard',
           query: {
             ...othersQuery,
           },

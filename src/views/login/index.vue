@@ -7,10 +7,14 @@
       />
       <div class="logo-text">Envcd Console</div>
     </div>
-    <LoginBanner />
+    <!-- <LoginBanner /> -->
     <div class="content">
       <div class="content-inner">
-        <LoginForm />
+        <LoginForm
+          v-if="formType === 'login'"
+          @to-register="formType = 'register'"
+        />
+        <RegisterForm v-else @to-login="formType = 'login'" />
       </div>
       <div class="footer">
         <Footer />
@@ -21,14 +25,22 @@
 
 <script lang="ts" setup>
   import Footer from '@/components/footer/index.vue';
-  import LoginBanner from './components/banner.vue';
+  // import LoginBanner from './components/banner.vue';
+  import { ref } from 'vue';
   import LoginForm from './components/login-form.vue';
+  import RegisterForm from './components/register-form.vue';
+
+  const formType = ref<string>('login');
 </script>
 
 <style lang="less" scoped>
   .container {
     display: flex;
     height: 100vh;
+
+    .logo-text {
+      color: #1d2129;
+    }
 
     .banner {
       width: 550px;

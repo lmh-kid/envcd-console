@@ -1,0 +1,16 @@
+export default {
+  'users.list': '用户列表',
+  'users.name': '用户名称',
+  'users.identity': '用户类型',
+  'users.identity.admin': '管理员',
+  'users.identity.empty': '- -',
+  'users.state.true': '已激活',
+  'users.state.false': '未激活',
+  'users.state': '用户状态',
+  'users.createAt': '创建时间',
+  'users.operation': '操作',
+  'users.create': '创建用户',
+  'users.deleteAll': '批量删除',
+  'users.delete': '删除用户',
+  'users.editUser': '编辑用户',
+};

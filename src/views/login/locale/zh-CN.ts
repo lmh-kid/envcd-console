@@ -8,6 +8,15 @@ export default {
   'login.form.password.placeholder': '密码：admin',
   'login.form.rememberPassword': '记住密码',
   'login.form.forgetPassword': '忘记密码',
+  // define data
+  'login.userName': '请输入用户名称',
+  'login.password': '请输入密码',
+  'login.password2': '请再次输入密码',
+  'login.password2.error': '请再次输入密码',
+
+  // register
+  'register.form.title': '注册 Envcd Console 账户',
+
   'login.form.login': '登录',
   'login.form.register': '注册账号',
   'login.banner.slogan1': '开箱即用的高质量模板',

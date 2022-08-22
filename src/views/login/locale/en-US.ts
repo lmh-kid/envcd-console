@@ -10,6 +10,14 @@ export default {
   'login.form.forgetPassword': 'Forgot password',
   'login.form.login': 'login',
   'login.form.register': 'register account',
+  // define data
+  'login.userName': 'Enter your User Name',
+  'login.password': 'Enter your Password',
+  'login.password2': 'Enter your Password Again',
+
+  // register
+  'register.form.title': 'Register Envcd Console Account',
+
   'login.banner.slogan1': 'Out-of-the-box high-quality template',
   'login.banner.subSlogan1':
     'Rich page templates, covering most typical business scenarios',

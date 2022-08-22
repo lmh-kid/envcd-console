@@ -12,7 +12,7 @@ setupMock({
     // Mock.XHR.prototype.withCredentials = true;
 
     // 用户信息
-    Mock.mock(new RegExp('/api/user/info'), () => {
+    Mock.mock(new RegExp('/admin/user/undefined'), () => {
       if (isLogin()) {
         const role = window.localStorage.getItem('userRole') || 'admin';
         return successResponseWrap({
@@ -39,7 +39,7 @@ setupMock({
     });
 
     // 登录
-    Mock.mock(new RegExp('/api/user/login'), (params: MockParams) => {
+    Mock.mock(new RegExp('/login'), (params: MockParams) => {
       const { username, password } = JSON.parse(params.body);
       if (!username) {
         return failResponseWrap(null, '用户名不能为空', 50000);
