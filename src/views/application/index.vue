@@ -18,7 +18,7 @@
       :key="currentLocale"
       v-model:selectedKeys="selectedKeys"
       row-key="id"
-      :columns="userColumns"
+      :columns="tableColumns"
       :row-selection="rowSelection"
       :data="userList"
       :pagination="pagination"
@@ -52,7 +52,8 @@
   import { useI18n } from 'vue-i18n';
   import useLocale from '@/hooks/locale';
   import { User } from '@/types/user';
-  import { getUserList } from '@/api/user';
+  import type { Page, TablePage } from '@/types/global';
+  import { getDefaultPage } from '@/utils/common';
   import getTableColumn from './config';
   import CreateUser from './components/create-user.vue';
   import DeleteUser from './components/delete-user.vue';
@@ -63,18 +64,20 @@
   const createModal = ref();
   const deleteModal = ref();
   const userList = ref<User[]>([]);
-  const selectedKeys = ref<number[]>([]);
-  // user table
-  const userColumns = ref<any>();
+  const selectedKeys = ref<string[]>([]);
+  const pagination = ref<TablePage>(getDefaultPage());
+
+  const tableColumns = ref<any>();
   const rowSelection = reactive({
-    type: 'checkbox',
     showCheckedAll: true,
     onlyCurrent: false,
   });
 
-  watch(currentLocale, (userColumns.value = getTableColumn(t)));
+  watch(currentLocale, () => {
+    tableColumns.value = getTableColumn(t);
+  });
   nextTick(() => {
-    userColumns.value = getTableColumn(t);
+    tableColumns.value = getTableColumn(t);
   });
 
   // get user list
@@ -96,9 +99,6 @@
       },
     ];
     // if api is ok
-    getUserList().then((res: User[]) => {
-      userList.value = res;
-    });
   };
   getscopespaces();
 

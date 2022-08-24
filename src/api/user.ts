@@ -4,6 +4,7 @@ import { UserState } from '@/store/modules/user/types';
 import type { User } from '@/types/user';
 import type { Scopespaces } from '@/types/scopespaces';
 import type { Dictionaries } from '@/types/dictionaries';
+import type { Page } from '@/types/global';
 
 export interface LoginData {
   username: string;
@@ -42,7 +43,7 @@ export function getMenuList() {
 }
 
 export function getUserList() {
-  return axios.get<User[]>('/v1/users');
+  return axios.get<any, Page<User[]>>('/v1/users');
 }
 
 export function updateUserById(user: User) {
@@ -58,7 +59,7 @@ export function deleteUserById(userId: string) {
 }
 
 export function getScopespacesListById(userId: string) {
-  return axios.get<Scopespaces[]>(`/v1/users/${userId}/scopespaces`);
+  return axios.get<Page<Scopespaces[]>>(`/v1/users/${userId}/scopespaces`);
 }
 
 export function getDictionariesListById(
@@ -69,5 +70,5 @@ export function getDictionariesListById(
   if (scopespacesId) {
     requestUrl = `/v1/users/${userId}/scopespace/${scopespacesId}/dictionaries`;
   }
-  return axios.get<Dictionaries[]>(requestUrl);
+  return axios.get<Page<Dictionaries[]>>(requestUrl);
 }

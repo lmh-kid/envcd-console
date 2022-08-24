@@ -1,12 +1,13 @@
 import axios from 'axios';
 import type { Dictionaries } from '@/types/dictionaries';
+import type { Page } from '@/types/global';
 
 export function createDictionaries(dictionaries: Dictionaries) {
   return axios.post<Dictionaries[]>(`/v1/dictionaries`, dictionaries);
 }
 
 export function getDictionariesList() {
-  return axios.get<Dictionaries[]>(`/v1/dictionaries`);
+  return axios.get<Page<Dictionaries[]>>(`/v1/dictionaries`);
 }
 
 export function getDictionariesById(id: number) {

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import type { Scopespaces } from '@/types/scopespaces';
+import type { Page } from '@/types/global';
 
-export function getScopespacesList() {
-  return axios.get<Scopespaces[]>(`/v1/scopespaces`);
+export function getScopespacesList(params: any) {
+  return axios.get<Page<Scopespaces[]>>(`/v1/scopespaces`, params);
 }
 
 // todo

@@ -53,6 +53,8 @@
   import useLocale from '@/hooks/locale';
   import { User } from '@/types/user';
   import { getUserList } from '@/api/user';
+  import type { Page, TablePage } from '@/types/global';
+  import { getDefaultPage, getPage } from '@/utils/common';
   import getTableColumn from './config';
   import CreateUser from './components/create-user.vue';
   import DeleteUser from './components/delete-user.vue';
@@ -63,18 +65,23 @@
   const createModal = ref();
   const deleteModal = ref();
   const userList = ref<User[]>([]);
-  const selectedKeys = ref<number[]>([]);
+  const selectedKeys = ref<string[]>([]);
+  const pagination = ref<TablePage>(getDefaultPage());
   // user table
   const userColumns = ref<any>();
   const rowSelection = reactive({
-    type: 'checkbox',
     showCheckedAll: true,
     onlyCurrent: false,
   });
 
-  watch(currentLocale, (userColumns.value = getTableColumn(t)));
-  nextTick(() => {
+  const updataTableColumn = () => {
     userColumns.value = getTableColumn(t);
+  };
+  watch(currentLocale, () => {
+    updataTableColumn();
+  });
+  nextTick(() => {
+    updataTableColumn();
   });
 
   // get user list
@@ -96,8 +103,9 @@
       },
     ];
     // if api is ok
-    getUserList().then((res: User[]) => {
-      userList.value = res;
+    getUserList().then((res: Page<User[]>) => {
+      userList.value = res.list;
+      pagination.value = getPage(res);
     });
   };
   getUsers();

@@ -35,3 +35,17 @@ export interface GeneralChart {
   xAxis: string[];
   data: Array<{ name: string; value: number[] }>;
 }
+
+export interface Page<T> {
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPage?: number;
+  list: T;
+}
+
+export interface TablePage {
+  'total': number;
+  'current': number;
+  'page-size': number;
+}
