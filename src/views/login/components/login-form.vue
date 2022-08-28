@@ -100,7 +100,7 @@
         await userStore.login(values as LoginData);
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
         router.push({
-          name: (redirect as string) || 'dashboard',
+          name: (redirect as string) || 'users',
           query: {
             ...othersQuery,
           },
@@ -115,6 +115,9 @@
       } catch (err) {
         errorMessage.value = (err as Error).message;
       } finally {
+        router.push({
+          name: 'users',
+        });
         setLoading(false);
       }
     }

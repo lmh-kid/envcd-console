@@ -86,25 +86,8 @@
 
   // get user list
   const getUsers = () => {
-    userList.value = [
-      {
-        id: 2,
-        name: 'string',
-        identity: 0,
-        state: true,
-        createAt: '2022-08-15',
-      },
-      {
-        id: 3,
-        name: 'string',
-        identity: 5,
-        state: false,
-        createAt: '2022-08-15',
-      },
-    ];
-    // if api is ok
     getUserList().then((res: Page<User[]>) => {
-      userList.value = res.list;
+      userList.value = res.list || [];
       pagination.value = getPage(res);
     });
   };

@@ -2,8 +2,8 @@ import localeMessageBox from '@/components/message-box/locale/zh-CN';
 import localeLogin from '@/views/login/locale/zh-CN';
 import localeUsers from '@/views/users/locale/zh-CN';
 import localeWorkplace from '@/views/dashboard/workplace/locale/zh-CN';
-import localeScopespaces from '@/views/application/locale/zh-CN';
 import localeDictionaries from '@/views/dictionaries/locale/zh-CN';
+import localeScopespaces from '@/views/scopespaces/locale/zh-CN';
 
 import localeSettings from './zh-CN/settings';
 
@@ -25,6 +25,7 @@ export default {
   'menu.dictionaries': '字典管理',
   'menu.dictionariesList': '字典列表',
   'menu.scopespaces': '作用空间',
+  'menu.scopeSpacesCreate': '创建空间',
   'menu.users': '用户管理',
   'menu.userList': '用户列表',
   'global.edit': '编辑',

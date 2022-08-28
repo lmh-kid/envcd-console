@@ -2,8 +2,8 @@ import { DEFAULT_LAYOUT } from '@/router/constants';
 import { AppRouteRecordRaw } from '../types';
 
 const DASHBOARD: AppRouteRecordRaw = {
-  path: '/application',
-  name: 'application',
+  path: '/scopespaces',
+  name: 'scopespaces',
   component: DEFAULT_LAYOUT,
   meta: {
     locale: 'menu.scopespaces',
@@ -14,11 +14,23 @@ const DASHBOARD: AppRouteRecordRaw = {
   children: [
     {
       path: 'index',
-      name: 'applicationIndex',
-      component: () => import('@/views/application/index.vue'),
+      name: 'scopeSpacesIndex',
+      component: () => import('@/views/scopespaces/index.vue'),
       meta: {
         locale: 'menu.scopespaces',
         requiresAuth: true,
+        hideChildrenInMenu: true,
+        roles: ['*'],
+      },
+    },
+    {
+      path: 'create',
+      name: 'scopeSpacesCreate',
+      component: () => import('@/views/scopespaces/create/create.vue'),
+      meta: {
+        locale: 'menu.scopeSpacesCreate',
+        requiresAuth: true,
+        hideInMenu: true,
         roles: ['*'],
       },
     },

@@ -10,6 +10,13 @@ export default mergeConfig(
       fs: {
         strict: true,
       },
+      proxy: {
+        '/v1': {
+          target: 'http://123.57.13.246:8000', // 目标地址
+          changeOrigin: true, // 是否开启跨域
+          rewrite: (path) => path.replace('', ''),
+        },
+      },
     },
     plugins: [
       eslint({

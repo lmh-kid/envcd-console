@@ -41,8 +41,7 @@
       </template>
     </a-table>
 
-    <create-user ref="createModal" />
-    <delete-user ref="deleteModal" />
+    <delete-scope-spaces ref="deleteModal" />
   </global-page>
 </template>
 
@@ -54,9 +53,9 @@
   import { User } from '@/types/user';
   import type { Page, TablePage } from '@/types/global';
   import { getDefaultPage } from '@/utils/common';
+  import router from '@/router';
   import getTableColumn from './config';
-  import CreateUser from './components/create-user.vue';
-  import DeleteUser from './components/delete-user.vue';
+  import DeleteScopeSpaces from './components/delete-modal.vue';
 
   const { currentLocale } = useLocale();
   const { t } = useI18n();
@@ -103,7 +102,12 @@
   getscopespaces();
 
   const openModal = (type: string, user?: User) => {
-    if (type === 'create') createModal.value.openModal();
+    if (type === 'create') {
+      router.push({
+        path: '/scopespaces/create',
+        name: 'scopeSpacesCreate',
+      });
+    }
     if (type === 'edit') {
       createModal.value.openModal();
       createModal.value.setData('edit', user);

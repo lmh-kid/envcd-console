@@ -2,9 +2,9 @@ import type { Page } from '@/types/global';
 
 export const getPage = (data: Page<any>) => {
   return {
-    'total': data.total,
-    'current': data.page,
-    'page-size': data.pageSize,
+    'total': data.total || 0,
+    'current': data.page || 1,
+    'page-size': data.pageSize || 20,
   };
 };
 
