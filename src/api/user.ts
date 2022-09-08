@@ -1,6 +1,5 @@
 import axios from 'axios';
 import type { RouteRecordNormalized } from 'vue-router';
-import { UserState } from '@/store/modules/user/types';
 import type { User } from '@/types/user';
 import type { Scopespaces } from '@/types/scopespaces';
 import type { Dictionaries } from '@/types/dictionaries';
@@ -12,7 +11,8 @@ export interface LoginData {
 }
 
 export interface LoginRes {
-  token: string;
+  accessToken: string;
+  userId: number;
 }
 
 export interface RegisterData {
@@ -22,20 +22,20 @@ export interface RegisterData {
   state: boolean;
 }
 
+export function login(data: LoginData) {
+  return axios.post<any, LoginRes>('/login', data);
+}
+
+export function logout(username: string) {
+  return axios.get(`/logout?username=${username}`);
+}
+
+export function getUserInfo(userId: number) {
+  return axios.get<any, User>(`/v1/users/${userId}`);
+}
+
 export function createUser(data: RegisterData) {
   return axios.put('/admin/user', data);
-}
-
-export function login(data: LoginData) {
-  return axios.post<LoginRes>('/login', data);
-}
-
-export function logout() {
-  return axios.get<LoginRes>('/logout');
-}
-
-export function getUserInfo(userId: string) {
-  return axios.get<UserState>(`/admin/user/${userId}`);
 }
 
 export function getMenuList() {

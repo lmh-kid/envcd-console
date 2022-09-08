@@ -5,6 +5,7 @@ import localeWorkplace from '@/views/dashboard/workplace/locale/zh-CN';
 import localeDictionaries from '@/views/dictionaries/locale/zh-CN';
 import localeScopespaces from '@/views/scopespaces/locale/zh-CN';
 
+import errorCode from './zh-CN/error-code';
 import localeSettings from './zh-CN/settings';
 
 export default {
@@ -38,4 +39,5 @@ export default {
   ...localeUsers,
   ...localeScopespaces,
   ...localeDictionaries,
+  ...errorCode,
 };

@@ -2,7 +2,6 @@
   <div class="login-form-wrapper">
     <div class="login-form-title">{{ $t('login.form.title') }}</div>
     <div class="login-form-sub-title">{{ $t('login.form.title') }}</div>
-    <div class="login-form-error-msg">{{ errorMessage }}</div>
     <a-form
       ref="loginForm"
       :model="userInfo"
@@ -46,7 +45,7 @@
           <a-checkbox
             checked="rememberPassword"
             :model-value="loginConfig.rememberPassword"
-            @change="setRememberPassword as any"
+            @change="setRememberPassword"
           >
             {{ $t('login.form.rememberPassword') }}
           </a-checkbox>
@@ -61,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive } from 'vue';
+  import { reactive } from 'vue';
   import { useRouter } from 'vue-router';
   import { Message } from '@arco-design/web-vue';
   import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
@@ -73,7 +72,6 @@
 
   const router = useRouter();
   const { t } = useI18n();
-  const errorMessage = ref('');
   const { loading, setLoading } = useLoading();
   const userStore = useUserStore();
 
@@ -100,12 +98,13 @@
         await userStore.login(values as LoginData);
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
         router.push({
-          name: (redirect as string) || 'users',
+          name: (redirect as string) || 'userList',
           query: {
             ...othersQuery,
           },
         });
         Message.success(t('login.form.login.success'));
+        userStore.info();
         const { rememberPassword } = loginConfig.value;
         const { username, password } = values;
         // 实际生产环境需要进行加密存储。
@@ -113,11 +112,8 @@
         loginConfig.value.username = rememberPassword ? username : '';
         loginConfig.value.password = rememberPassword ? password : '';
       } catch (err) {
-        errorMessage.value = (err as Error).message;
+        Message.error(t(err.response.data.code));
       } finally {
-        router.push({
-          name: 'users',
-        });
         setLoading(false);
       }
     }

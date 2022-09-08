@@ -7,45 +7,34 @@ import {
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
-import { UserState } from './types';
+import { User } from '@/types/user';
 import useAppStore from '../app';
 
 const useUserStore = defineStore('user', {
-  state: (): UserState => ({
-    name: undefined,
-    avatar: undefined,
-    job: undefined,
-    organization: undefined,
-    location: undefined,
-    email: undefined,
-    introduction: undefined,
-    personalWebsite: undefined,
-    jobName: undefined,
-    organizationName: undefined,
-    locationName: undefined,
-    phone: undefined,
-    registrationDate: undefined,
-    accountId: undefined,
-    certification: undefined,
-    role: '',
+  state: (): User => ({
+    id: 0,
+    name: '',
+    identity: 0, // 0 1
+    state: 'enabled',
   }),
 
   getters: {
-    userInfo(state: UserState): UserState {
+    userInfo(state: User): User {
       return { ...state };
     },
   },
 
   actions: {
     switchRoles() {
-      return new Promise((resolve) => {
-        this.role = this.role === 'user' ? 'admin' : 'user';
-        resolve(this.role);
-      });
+      // return new Promise((resolve) => {
+      //   this.role = this.role === 'user' ? 'admin' : 'user';
+      //   resolve(this.role);
+      // });
     },
     // Set user's information
-    setInfo(partial: Partial<UserState>) {
+    setInfo(partial: Partial<User>) {
       this.$patch(partial);
+      console.log('partial', partial);
     },
 
     // Reset user's information
@@ -55,18 +44,20 @@ const useUserStore = defineStore('user', {
 
     // Get user's information
     async info() {
-      // const res = await getUserInfo();
-      // this.setInfo(res.data);
+      if (this.id) {
+        const res = await getUserInfo(this.id);
+        this.setInfo(res);
+      }
     },
 
     // Login
     async login(loginForm: LoginData) {
       try {
         const res = await userLogin(loginForm);
-        setToken(res.data.token);
+        this.id = res.userId;
+        setToken(res.accessToken);
       } catch (err) {
-        setToken('res.data.token');
-        // clearToken();
+        clearToken();
         throw err;
       }
     },
@@ -80,7 +71,7 @@ const useUserStore = defineStore('user', {
     // Logout
     async logout() {
       try {
-        await userLogout();
+        await userLogout(this.name);
       } finally {
         this.logoutCallBack();
       }

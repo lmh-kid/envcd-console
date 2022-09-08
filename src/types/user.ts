@@ -2,7 +2,7 @@ export interface User {
   id?: number;
   name: string;
   identity: number; // 0 1
-  state: boolean;
+  state: string;
   createAt?: string;
   updateAt?: string;
 }

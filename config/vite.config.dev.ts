@@ -11,10 +11,10 @@ export default mergeConfig(
         strict: true,
       },
       proxy: {
-        '/v1': {
+        '/api': {
           target: 'http://123.57.13.246:8000', // 目标地址
           changeOrigin: true, // 是否开启跨域
-          rewrite: (path) => path.replace('', ''),
+          rewrite: (path) => path.replace('/api', ''),
         },
       },
     },

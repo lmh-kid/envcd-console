@@ -3,9 +3,9 @@ import localeLogin from '@/views/login/locale/en-US';
 import localeUsers from '@/views/users/locale/en-US';
 import localeScopespaces from '@/views/scopespaces/locale/en-US';
 import localeDictionaries from '@/views/dictionaries/locale/en-US';
-
 import localeWorkplace from '@/views/dashboard/workplace/locale/en-US';
 
+import errorCode from './en-US/error-code';
 import localeSettings from './en-US/settings';
 
 export default {
@@ -39,4 +39,5 @@ export default {
   ...localeUsers,
   ...localeScopespaces,
   ...localeDictionaries,
+  ...errorCode,
 };
